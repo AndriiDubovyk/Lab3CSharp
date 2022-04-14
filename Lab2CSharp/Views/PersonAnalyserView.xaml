@@ -17,5 +17,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Button Name="ButtonOK" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="25" Width="75" Margin="5" Content="OK"></Button>
     </Grid>
 </UserControl>
