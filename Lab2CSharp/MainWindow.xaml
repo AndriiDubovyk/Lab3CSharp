@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:Lab2CSharp.Views"
         xmlns:local="clr-namespace:Lab2CSharp"
         mc:Ignorable="d"
-        Title="Person Analyser" Height="450" Width="800">
+        Title="Person Analyser" Height="300" Width="300" MinHeight="300" MinWidth="280">
     <Grid>
         <views:PersonAnalyserView></views:PersonAnalyserView>
     </Grid>
