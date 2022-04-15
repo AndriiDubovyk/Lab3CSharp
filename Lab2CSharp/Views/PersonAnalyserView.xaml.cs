@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Lab2CSharp.ViewModels;
 
 namespace Lab2CSharp.Views
 {
@@ -20,9 +21,12 @@ namespace Lab2CSharp.Views
     /// </summary>
     public partial class PersonAnalyserView : UserControl
     {
+        private PersonAnalyserViewModel _viewModel;
+
         public PersonAnalyserView()
         {
             InitializeComponent();
+            DataContext = _viewModel = new PersonAnalyserViewModel();
         }
     }
 }
