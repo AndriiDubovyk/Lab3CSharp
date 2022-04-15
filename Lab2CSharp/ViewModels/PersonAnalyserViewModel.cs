@@ -52,15 +52,15 @@ namespace Lab2CSharp.ViewModels
                 _person.Email = value;
             }
         }
-        public DateTime Birthday
+        public DateTime? Birthdate
         {
             get
             {
-                return _person.Birthday;
+                return _person.Birthdate;
             }
             set
             {
-                _person.Birthday = value;
+                _person.Birthdate = value;
             }
         }
         #endregion
@@ -75,7 +75,11 @@ namespace Lab2CSharp.ViewModels
 
         private void Proceed()
         {
-            MessageBox.Show(Birthday.Year.ToString());
+            /*if(Birthdate.HasValue)
+            {
+                MessageBox.Show(Birthdate.Value.Year.ToString());
+            }*/
+            MessageBox.Show(FirstName);
         }
 
         private bool CanExecute(object obj)

@@ -12,7 +12,7 @@ namespace Lab2CSharp.Models
         private string _firstName;
         private string _lastName;
         private string _email;
-        private DateTime _birthday;
+        private DateTime? _birthdate;
         #endregion
 
         #region Properties
@@ -49,15 +49,15 @@ namespace Lab2CSharp.Models
                 _email = value;
             }
         }
-        public DateTime Birthday
+        public DateTime? Birthdate
         {
             get
             {
-                return _birthday;
+                return _birthdate;
             }
             set
             {
-                _birthday = value;
+                _birthdate = value;
             }
         }
         #endregion
