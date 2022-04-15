@@ -8,63 +8,104 @@ namespace Lab2CSharp.Models
 {
     class Person
     {
-        #region Fields
-        private string _firstName;
-        private string _lastName;
-        private string _email;
-        private DateTime _birthdate;
+        #region Constructors
+        public Person(string firstName, string lastName, string email, DateTime birthdate)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Birthdate = birthdate;
+            IsAdult = (GetAge() >= 18);
+            SunSign = GetSunSign();
+            ChineseSign = GetChineseSign();
+            IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+        }
+
+        public Person(string firstName, string lastName, string email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Birthdate = DateTime.Today;
+            IsAdult = (GetAge() >= 18);
+            SunSign = GetSunSign();
+            ChineseSign = GetChineseSign();
+            IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+        }
+
+        public Person(string firstName, string lastName, DateTime bitrhdate)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = "";
+            Birthdate = DateTime.Today;
+            IsAdult = (GetAge() >= 18);
+            SunSign = GetSunSign();
+            ChineseSign = GetChineseSign();
+            IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+        }
         #endregion
 
+
         #region Properties
-        public string FirstName
-        {
-            get { return _firstName; }
-            set { _firstName = value; }
-        }
-        public string LastName
-        {
-            get { return _lastName; }
-            set { _lastName = value; }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-        public DateTime Birthdate
-        {
-            get { return _birthdate; }
-            set { _birthdate = value; }
-        }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string Email { get; }
+        public DateTime Birthdate { get; }
         public bool IsAdult { get; }
         public string SunSign { get; }
         public string ChineseSign { get; }
         public bool IsBirthday { get; }
         #endregion
 
-        #region Constructors
-        public Person(string firstName, string lastName, string email, DateTime bitrhdate)
+        private int GetAge()
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _email = email;
-            _birthdate = bitrhdate;
+            int yearsDifference = DateTime.Today.Year - Birthdate.Year;
+            int monthDifference = DateTime.Today.Month - Birthdate.Month;
+            int daysDifference = DateTime.Today.Day - Birthdate.Day;
+            if (monthDifference > 0 || (monthDifference == 0 && daysDifference >= 0))
+            {
+                return yearsDifference; // already celebrated the birthday in this year
+            }
+            return yearsDifference - 1; // will celebrate the birthday
         }
 
-        public Person(string firstName, string lastName, string email)
+        private string GetSunSign()
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _email = email;
+            double monthDotDay = Birthdate.Month + Birthdate.Day / 100.0;
+            if (monthDotDay < 1.20) return "Capricorn";
+            if (monthDotDay < 2.19) return "Aquarius";
+            if (monthDotDay < 3.21) return "Pisces";
+            if (monthDotDay < 4.20) return "Aries";
+            if (monthDotDay < 5.21) return "Taurus";
+            if (monthDotDay < 6.22) return "Gemini";
+            if (monthDotDay < 7.23) return "Cancer";
+            if (monthDotDay < 8.23) return "Leo";
+            if (monthDotDay < 9.23) return "Virgo";
+            if (monthDotDay < 10.23) return "Libra";
+            if (monthDotDay < 11.23) return "Scorpio";
+            if (monthDotDay < 12.22) return "Sagittarius";
+            return "Capricorn";
         }
 
-        public Person(string firstName, string lastName, DateTime bitrhdate)
-        {
-            _firstName = firstName;
-            _lastName = lastName;
-            _birthdate = bitrhdate;
-        }
-        #endregion
+        private static String[] ChineseZodiacSignsNames = {
+            "Monkey",
+            "Rooster",
+            "Dog",
+            "Pig",
+            "Rat",
+            "Ox",
+            "Tiger",
+            "Rabbit",
+            "Dragon",
+            "Snake",
+            "Horse",
+            "Goat"
+        };
 
+        private string GetChineseSign()
+        {
+            return ChineseZodiacSignsNames[Birthdate.Year % 12];
+        }
     }
 }
