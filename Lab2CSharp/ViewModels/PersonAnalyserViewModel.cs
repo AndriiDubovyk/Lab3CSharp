@@ -8,10 +8,10 @@ using Lab2CSharp.Tools;
 using Lab2CSharp.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Threading;
 namespace Lab2CSharp.ViewModels
 {
-    class PersonAnalyserViewModel : INotifyPropertyChanged
+    class PersonAnalyserViewModel
     {
         #region Fields
         private PersonCandidate _person = new PersonCandidate();
@@ -73,30 +73,42 @@ namespace Lab2CSharp.ViewModels
             }
         }
 
-        private void Proceed()
+        private async void Proceed()
         {
-            /*if(Birthdate.HasValue)
-            {
-                MessageBox.Show(Birthdate.Value.Year.ToString());
-            }*/
-            MessageBox.Show(FirstName);
+                try
+                {
+                    await Task.Run(() => AnalysePersonCandidate(_person));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Process failed: {ex.Message}");
+                    return;
+                }
+                finally
+                {
+                }
+        }
+
+        private void AnalysePersonCandidate(PersonCandidate pCandidate)
+        {
+            Thread.Sleep(2000);
+            Person person = new Person(pCandidate.FirstName, pCandidate.LastName, pCandidate.Email, pCandidate.Birthdate.Value);
+            MessageBox.Show("First Name: " + person.FirstName + "\n"
+                + "Last Name: " + person.LastName + "\n"
+                + "Email: " + person.Email + "\n"
+                + "Birthdate: " + person.Birthdate.ToShortDateString() + "\n"
+                + "Is Adult: " + person.IsAdult + "\n"
+                + "Sun Sign: " + person.SunSign + "\n"
+                + "Chinese Sign : " + person.ChineseSign + "\n"
+                + "Is Birthday : " + person.IsBirthday + "\n");
         }
 
         private bool CanExecute(object obj)
         {
-            return true;
+            return !String.IsNullOrWhiteSpace(_person.FirstName) 
+                && !String.IsNullOrWhiteSpace(_person.LastName)
+                && !String.IsNullOrWhiteSpace(_person.Email)
+                && Birthdate!=null;
         }
-
-        #region EventsAndHandlers
-        #region PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-        #endregion
     }
 }
