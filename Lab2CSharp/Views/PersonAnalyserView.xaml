@@ -17,11 +17,17 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <tools:TextBoxWithCaption x:Name="TbFirstName" Grid.Row="0" Grid.Column="0" Caption="First Name" Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
-        <tools:TextBoxWithCaption x:Name="TbLastName" Grid.Row="1" Grid.Column="0" Caption="Last Name" Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
-        <tools:TextBoxWithCaption x:Name="TbEmail" Grid.Row="2" Grid.Column="0" Caption="Email" Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
-        <DatePicker Name="BirthdatePicker" Grid.Row="3"  Grid.Column="0" VerticalAlignment="Center" Height="25" Margin="5" SelectedDate="{Binding Birthdate, Mode=OneWayToSource}"></DatePicker>
-        <Button Name="ButtonProceed" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Height="25" Width="75" Margin="5" Content="Proceed" Command ="{Binding ProceedCommand}"></Button>
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,5,2" Text="First Name:" FontSize="15" Foreground="Gray"/>
+        <TextBox Name="TbFirstName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Height="25" Margin="5,0,5,5" Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,5,2" Text="Last Name:" FontSize="15" Foreground="Gray"/>
+        <TextBox Name="TbLastName" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="25" Margin="5,0,5,5" Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,5,2" Text="Email:" FontSize="15" Foreground="Gray"/>
+        <TextBox Name="TbEmail" Grid.Row="2" Grid.Column="1" Height="25" Grid.ColumnSpan="2" Margin="5,0,5,5" Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,5,2" Text="Birthdate:" FontSize="15" Foreground="Gray"/>
+        <DatePicker Name="BirthdatePicker" Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="25" Margin="5" SelectedDate="{Binding Birthdate, Mode=OneWayToSource}"></DatePicker>
+        <Button Name="ButtonProceed" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Height="25" Width="75" Margin="5" Content="Proceed" Command ="{Binding ProceedCommand}"></Button>
     </Grid>
 </UserControl>
