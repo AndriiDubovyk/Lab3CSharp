@@ -84,16 +84,18 @@ namespace Lab2CSharp.ViewModels
                     MessageBox.Show($"Process failed: {ex.Message}");
                     return;
                 }
-                finally
-                {
-                }
         }
 
         private void AnalysePersonCandidate(PersonCandidate pCandidate)
         {
             Thread.Sleep(2000);
             Person person = new Person(pCandidate.FirstName, pCandidate.LastName, pCandidate.Email, pCandidate.Birthdate.Value);
-            MessageBox.Show("First Name: " + person.FirstName + "\n"
+            if(person.GetAge()>135 || person.GetAge()<0)
+            {
+                MessageBox.Show("Wrong date!\nYou cannot be over 135 years old and your date of birth must be today or earlier!");
+            } else
+            {
+                MessageBox.Show("First Name: " + person.FirstName + "\n"
                 + "Last Name: " + person.LastName + "\n"
                 + "Email: " + person.Email + "\n"
                 + "Birthdate: " + person.Birthdate.ToShortDateString() + "\n"
@@ -101,6 +103,7 @@ namespace Lab2CSharp.ViewModels
                 + "Sun Sign: " + person.SunSign + "\n"
                 + "Chinese Sign : " + person.ChineseSign + "\n"
                 + "Is Birthday : " + person.IsBirthday + "\n");
+            }
         }
 
         private bool CanExecute(object obj)

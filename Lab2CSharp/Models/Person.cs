@@ -58,7 +58,7 @@ namespace Lab2CSharp.Models
         public bool IsBirthday { get; }
         #endregion
 
-        private int GetAge()
+        public int GetAge()
         {
             int yearsDifference = DateTime.Today.Year - Birthdate.Year;
             int monthDifference = DateTime.Today.Month - Birthdate.Month;
