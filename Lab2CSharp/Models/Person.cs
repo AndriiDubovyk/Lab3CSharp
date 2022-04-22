@@ -122,7 +122,7 @@ namespace Lab2CSharp.Models
         private void ValidateBirthdate()
         {
             if (GetAge() > 130) throw new FarDateOfBirthException("Your age can't be more than 130");  
-            if(Birthdate.CompareTo(DateTime.Today) < 0) throw new FutureDateOfBirthException("Birthdate cannot be in the future");
+            if(Birthdate.CompareTo(DateTime.Today) > 0) throw new FutureDateOfBirthException("Birthdate cannot be in the future");
         }
 
         private void ValidateEmail()
