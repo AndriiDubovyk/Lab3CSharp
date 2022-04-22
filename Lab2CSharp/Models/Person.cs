@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Lab3CSharp.Exceptions;
 
 namespace Lab2CSharp.Models
 {
@@ -19,6 +21,7 @@ namespace Lab2CSharp.Models
             SunSign = GetSunSign();
             ChineseSign = GetChineseSign();
             IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+            Validate();
         }
 
         public Person(string firstName, string lastName, string email)
@@ -31,6 +34,7 @@ namespace Lab2CSharp.Models
             SunSign = GetSunSign();
             ChineseSign = GetChineseSign();
             IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+            Validate();
         }
 
         public Person(string firstName, string lastName, DateTime bitrhdate)
@@ -43,6 +47,7 @@ namespace Lab2CSharp.Models
             SunSign = GetSunSign();
             ChineseSign = GetChineseSign();
             IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
+            Validate();
         }
         #endregion
 
@@ -106,6 +111,25 @@ namespace Lab2CSharp.Models
         private string GetChineseSign()
         {
             return ChineseZodiacSignsNames[Birthdate.Year % 12];
+        }
+
+        private void Validate()
+        {
+            ValidateBirthdate();
+            ValidateEmail();
+        }
+
+        private void ValidateBirthdate()
+        {
+            if (GetAge() > 130) throw new FarDateOfBirthException("Your age can't be more than 130");  
+            if(Birthdate.CompareTo(DateTime.Today) < 0) throw new FutureDateOfBirthException("Birthdate cannot be in the future");
+        }
+
+        private void ValidateEmail()
+        {
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            if(regex.IsMatch(Email)) throw new InvalidEmailException();
         }
     }
 }
