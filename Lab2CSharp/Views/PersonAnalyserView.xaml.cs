@@ -21,12 +21,11 @@ namespace Lab2CSharp.Views
     /// </summary>
     public partial class PersonAnalyserView : UserControl
     {
-        private PersonAnalyserViewModel _viewModel;
 
         public PersonAnalyserView()
         {
             InitializeComponent();
-            DataContext = _viewModel = new PersonAnalyserViewModel();
+            DataContext = new PersonAnalyserViewModel();
         }
     }
 }
