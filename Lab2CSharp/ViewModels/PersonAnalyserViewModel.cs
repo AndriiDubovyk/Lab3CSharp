@@ -75,17 +75,20 @@ namespace Lab2CSharp.ViewModels
 
         private async void Proceed()
         {
+            Window parentWindow = Application.Current.MainWindow;
             try
             {
-                Window parentWindow = Application.Current.MainWindow;
                 parentWindow.IsEnabled = false;
-                await Task.Run(() => AnalysePersonCandidate(_person));
-                parentWindow.IsEnabled = true;
+                await Task.Run(() => AnalysePersonCandidate(_person));            
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Process failed: {ex.Message}");
                 return;
+            }
+            finally
+            {
+                parentWindow.IsEnabled = true;
             }
         }
 
