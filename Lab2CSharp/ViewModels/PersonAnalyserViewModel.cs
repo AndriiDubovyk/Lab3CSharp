@@ -75,15 +75,18 @@ namespace Lab2CSharp.ViewModels
 
         private async void Proceed()
         {
-                try
-                {
-                    await Task.Run(() => AnalysePersonCandidate(_person));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Process failed: {ex.Message}");
-                    return;
-                }
+            try
+            {
+                Window parentWindow = Application.Current.MainWindow;
+                parentWindow.IsEnabled = false;
+                await Task.Run(() => AnalysePersonCandidate(_person));
+                parentWindow.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Process failed: {ex.Message}");
+                return;
+            }
         }
 
         private void AnalysePersonCandidate(PersonCandidate pCandidate)
@@ -107,7 +110,7 @@ namespace Lab2CSharp.ViewModels
                     + "Chinese Sign : " + person.ChineseSign + "\n"
                     + "Is Birthday : " + person.IsBirthday + "\n");
                 }
-            } 
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -117,10 +120,10 @@ namespace Lab2CSharp.ViewModels
 
         private bool CanExecute(object obj)
         {
-            return !String.IsNullOrWhiteSpace(_person.FirstName) 
+            return !String.IsNullOrWhiteSpace(_person.FirstName)
                 && !String.IsNullOrWhiteSpace(_person.LastName)
                 && !String.IsNullOrWhiteSpace(_person.Email)
-                && Birthdate!=null;
+                && Birthdate != null;
         }
     }
 }
