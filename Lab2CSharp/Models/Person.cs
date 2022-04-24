@@ -24,31 +24,9 @@ namespace Lab2CSharp.Models
             Validate();
         }
 
-        public Person(string firstName, string lastName, string email)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Birthdate = DateTime.Today;
-            IsAdult = (GetAge() >= 18);
-            SunSign = GetSunSign();
-            ChineseSign = GetChineseSign();
-            IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
-            Validate();
-        }
+        public Person(string firstName, string lastName, string email) : this(firstName, lastName, email, DateTime.Today) {}
 
-        public Person(string firstName, string lastName, DateTime bitrhdate)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = "";
-            Birthdate = DateTime.Today;
-            IsAdult = (GetAge() >= 18);
-            SunSign = GetSunSign();
-            ChineseSign = GetChineseSign();
-            IsBirthday = (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day == Birthdate.Day);
-            Validate();
-        }
+        public Person(string firstName, string lastName, DateTime bitrhdate) : this(firstName, lastName, "", bitrhdate) { }
         #endregion
 
 
